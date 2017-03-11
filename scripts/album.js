@@ -30,6 +30,39 @@ var albumMarconi = {
      ]
 };
 
+//Example 3
+var albumMadonna = {
+    title: 'Evita',
+    artist: 'Madonna and varios artists',
+    label: 'Warner Bros.',
+    year: '1995',
+    albumArtUrl: 'assets/images/album_covers/Evita.png',
+    songs: [
+        { title: 'Requiem for Evita', duration: '4:16'},
+        { title: 'Oh What a Circus' , duration: '5:45'},
+        { title: 'On This Night of A Thousand Stars' , duration: '2:24'},
+        { title: 'Eva and Magaldi', duration: '5:21'},
+        { title: 'Buenos A1res', duration: '4:09'},
+        { title: 'Another Suitcase in Another Hall', duration: '3:33'},
+        { title: 'Goodnight and Thankyou', duration: '4:18'},
+        { title: 'Id Be Surprisingly Good for You', duration: '4:19'},
+        { title: 'Perons Latest Flame', duration: '5:18'},
+        { title: 'A New Argentina', duration: '4:17'},
+        { title: 'Dont Cry for Me Argentina', duration: '5:36'},
+        { title: 'High Flying, Adored', duration: '3:32'},
+        { title: 'Rainbow High', duration: '2:27'},
+        { title: 'And the Money Kept Flowing In', duration: '3:53'},
+        { title: 'She is a Diamond', duration: '1:40'},
+        { title: 'Waltz for Eva and Che', duration'4:13'},
+        { title: 'You Must Love Me', duration: '2:52'},
+        { title: 'Evas Final Broadcast', duration: '5:16'},
+        { title: 'Lament', duration:'5:17'}
+    ]
+};
+    
+    
+}
+
 var createSongRow = function(songNumber, songName, songLength){
     var template =
       '<tr class="album-view-song-item">'
@@ -55,6 +88,17 @@ var setCurrentAlbum = function(album){
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + '' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
+       
+            var images = ['assets/images/album_covers/01.png', 'assets/images/album_covers/20.png', 'assets/images/album_covers/Evita.png'];
+            
+            var img = images[i];
+            albumImage.addEventListener("click", function(){
+                for (var i = 0; i < images.length; i++){
+                   
+                    img = images[i + 1]; 
+                });
+        
+            
     
     // clear the album song list HTML to make sure there are no interfering elements.
     albumSongList.innerHTML = '';
