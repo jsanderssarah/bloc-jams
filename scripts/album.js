@@ -94,6 +94,9 @@ var setCurrentAlbum = function(album) {
      albumImage.addEventListener("click", function(){
          setCurrentAlbum(albums[i]);
          i++;
+         if (i >= array.length){
+             i = 0;
+         }
      });
 };
                                  
