@@ -9,7 +9,6 @@
     var $row = $template;
     
     var clickHandler = function() {
-      $row.find('.song-item-number').click(clickHandler);
       var songNumber = parseInt($(this).attr('data-song-number'));    
 	  if (currentlyPlayingSongNumber !== null) {
 		var currentlyPlayingCell = parsInt($('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]'));
@@ -28,7 +27,7 @@
         currentlyPlayingSongNumber = null; 
         currentSongFromAlbum = null;    
 	  }
-      $row.hover(onHover, offHover);
+     
       var onHover = function(event) {
         var songNumberCell = parseInt($(this).find('.song-item-number'));
         var songNumber = parseInt(songNumberCell.attr('data-song-number'));
@@ -44,7 +43,9 @@
           songNumberCell.html(songNumber);
         console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);    
         }
-    };
+      };
+    $row.find('.song-item-number').click(clickHandler);
+    $row.hover(onHover, offHover);
     return$row;
    };
  };
