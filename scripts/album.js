@@ -1,15 +1,14 @@
  var createSongRow = function(songNumber, songName, songLength) {
-    var $template =
+    var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
       ;
-    var $row = $template;
+    var $row = template;
     
-    var clickHandler = function() {
-      $row.find('.song-item-number').click(clickHandler);
+     var clickHandler = function() {
       var songNumber = parseInt($(this).attr('data-song-number'));    
 	  if (currentlyPlayingSongNumber !== null) {
 		var currentlyPlayingCell = parsInt($('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]'));
@@ -28,7 +27,7 @@
         currentlyPlayingSongNumber = null; 
         currentSongFromAlbum = null;    
 	  }
-      $row.hover(onHover, offHover);
+      
       var onHover = function(event) {
         var songNumberCell = parseInt($(this).find('.song-item-number'));
         var songNumber = parseInt(songNumberCell.attr('data-song-number'));
@@ -45,6 +44,8 @@
         console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);    
         }
     };
+    $row.find('.song-item-number').click(clickHandler);
+    $row.hover(onHover, offHover);
     return$row;
    };
  };
