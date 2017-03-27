@@ -142,6 +142,7 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
 var currentAlbum = null;
 var currentlyPlayingSongNumber = null;     
 var currentSongFromAlbum = null;
+var currentSoundFile = null;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 var songRows = document.getElementsByClassName('album-view-song-item');
