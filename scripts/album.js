@@ -1,8 +1,18 @@
 var setSong = function(songNumber) {
     currentlyPlayingSongNumber = parsInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+         formats: [ 'mp3' ],
+         preload: true
+     });
+    setVolume(currentVolume);
 };
-getSongNumberCell function(number) {
+var setVolume = function(volume) {
+    if (currentSoundFile) {
+        currentSoundFile.setVolume(volume);
+    }
+};
+var getSongNumberCell = function(number) {
     return$('.song-item-number[data-song-number="' + number + '"]');
 };
 var createSongRow = function(songNumber, songName, songLength) {
@@ -33,6 +43,19 @@ var createSongRow = function(songNumber, songName, songLength) {
 		$('.main-controls .play-pause').html(playerBarPlayButton);
         setSong(songNumber) = null; 
         setSong(songNumber) = null;    
+        currentSoundFile.play();  
+        setSong(songNumber) = currentAlbum.songs[songNumber - 1];
+        updatePlayerBarSong();  
+	  } else if (setSong(songNumber) === songNumber) {
+		if (currentSoundFile.isPaused()) {
+            $(this).html(pauseButtonTemplate);
+            $('.main-controls .play-pause').html(playerBarPauseButton);
+            currentSoundFile.play();
+        } else {
+            $(this).html(playButtonTemplate);
+             $('.main-controls .play-pause').html(playerBarPlayButton);
+            currentSoundFile.pause();
+        }
 	  }
 
       var onHover = function(event) {
@@ -65,7 +88,7 @@ var updatePlayerBarSong = function() {
 };
 var nextSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, setSong(songNumber));
-    // Note that we're _incrementing_ the song here
+    //incrementing_ the song here
     currentSongIndex++;
 
     if (currentSongIndex >= currentAlbum.songs.length) {
@@ -77,6 +100,7 @@ var nextSong = function() {
 
     // Set a new current song
     setSong(songNumber) = currentSongIndex + 1;
+    currentSoundFile.play();
     setSong(songNumber) = currentAlbum.songs[currentSongIndex];
 
     // Update the Player Bar information
@@ -90,7 +114,7 @@ var nextSong = function() {
 };
 var previousSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, setSong(songNumber));
-    // Note that we're _decrementing_ the index here
+    //decrementing_ the index here
     currentSongIndex--;
 
     if (currentSongIndex < 0) {
@@ -102,6 +126,7 @@ var previousSong = function() {
 
     // Set a new current song
     setSong(songNumber) = currentSongIndex + 1;
+    currentSoundFile.play();
     setSong(songNumber) = currentAlbum.songs[currentSongIndex];
 
     // Update the Player Bar information
@@ -143,6 +168,7 @@ var currentAlbum = null;
 var currentlyPlayingSongNumber = null;     
 var currentSongFromAlbum = null;
 var currentSoundFile = null;
+var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 var songRows = document.getElementsByClassName('album-view-song-item');
