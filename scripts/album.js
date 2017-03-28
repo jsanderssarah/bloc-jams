@@ -15,7 +15,7 @@ var seek = function(time) {
      if (currentSoundFile) {
          currentSoundFile.setTime(time);
      }
- }
+ };
 
 var setVolume = function(volume) {
      if (currentSoundFile) {
@@ -137,9 +137,18 @@ var setupSeekBars = function() {
          var offsetX = event.pageX - $(this).offset().left;
          var barWidth = $(this).width();
          var seekBarFillRatio = offsetX / barWidth;
+         
+         if ($(this).parent().attr('class') == 'seek-control') {
+            seek(seekBarFillRatio * currentSoundFile.getDuration());
+        } else {
+            setVolume(seekBarFillRatio * 100);   
+        }
+
          updateSeekPercentage($(this), seekBarFillRatio);
      });
- };
+};
+                                       
+                                       
                                        
 var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
