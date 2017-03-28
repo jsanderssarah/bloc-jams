@@ -158,17 +158,15 @@ var previousSong = function() {
     $lastSongNumberCell.html(lastSongNumber);
 };
 
-var togglePlayFromPlayerBar = function(){
-        if (currentSoundFile.isPaused() {
-            if ($playPauseToggle.click(function() {
-                $playPauseToggle.html(playerBarPauseButton);
-                currentSoundFile.play();
-            }))
-        }
-        else {
-            
-        }      
-
+var togglePlayFromPlayerBar = function() {
+  if(currentSoundFile.isPaused()){
+    $playPauseToggle.html(playerBarPauseButton);
+    currentSoundFile.play();
+  } else {
+    $playPauseToggle.html(playerBarPlayButton);
+    currentSoundFile.pause();
+  }      
+};
 
 var updatePlayerBarSong = function() {
 
