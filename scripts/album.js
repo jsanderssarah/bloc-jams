@@ -32,7 +32,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
     var $row = $(template);
@@ -118,10 +118,28 @@ var updateSeekBarWhileSongPlays = function() {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            setCurrentTimeInPlayerBar(filterTimeCode(currentTime));
+            setTotalTimeInInPlayerBar(filterTimeCode(totalTime));
          });
      }
  };
 
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    var $currentTime = $('.currently-playing').find('.seek-control').find('.current-time');
+    console.log($currentTime);
+        $currentTime.html = currentTime;
+};
+
+var setTotalTimeInInPlayerBar = function(totalTime) {
+    var $totalTime = $('.currently-playing').find('.seek-control').find('.total-time');
+    totalTime = currentSongFromAlbum.songs.duration;
+    $totalTime = totalTime;
+};
+var filterTimeCode = function(timeInSeconds) {
+    var minutes = Math.floor(parseFloat(timeInSeconds) / 60);
+    var seconds = pasrseFloat(timeInSecons) - minutes(60);
+    return (minutes + ":" + second);
+}
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
     var offsetXPercent = seekBarFillRatio * 100;
     offsetXPercent = Math.max(0, offsetXPercent);
@@ -169,10 +187,6 @@ var setupSeekBars = function() {
 var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
  };
-
-var setCurrentTimeInPlayerBar = function(currentTime) {
-    
-}
 
 var nextSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
