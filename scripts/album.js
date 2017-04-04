@@ -136,7 +136,7 @@ var setTotalTimeInInPlayerBar = function(totalTime) {
 };
 var filterTimeCode = function(timeInSeconds) {
     var minutes = Math.floor(parseFloat(timeInSeconds) / 60);
-    var seconds = parseFloat(timeInSeconds) - (minutes * 60);
+    var seconds = parseFloat(Math.round(timeInSeconds)) - (minutes * 60);
     return (minutes + ":" + seconds);
 }
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
